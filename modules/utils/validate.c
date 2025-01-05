@@ -25,3 +25,13 @@ bool validateField(const char *value, const char *fieldName)
   }
   return true;
 }
+
+bool validateFieldNumber(const char *value, const char *fieldName)
+{
+  if (!isOnlyNumbers(value))
+  {
+    printf("O campo %s não pode conter caracteres.\n", fieldName);
+    return false;
+  }
+  return true;
+}

@@ -48,16 +48,24 @@ void cadastrarJogador()
     listarEquipes();
     printf("Escolha o índice da equipe do jogador: ");
     scanf("%d", &novoJogador.idEquipe);
-    while (novoJogador.idEquipe < 1 || novoJogador.idEquipe > totalEquipes)
+    while (novoJogador.idEquipe < 1 || novoJogador.idEquipe >= totalEquipes + 1)
     {
         printf("Equipe inválida.\n");
         printf("Escolha o índice da equipe do jogador: ");
         scanf("%d", &novoJogador.idEquipe);
     }
-    novoJogador.idEquipe--;
 
+    while (equipes[novoJogador.idEquipe - 1].totalJogadores + 1 > MAX_JOGADORES_POR_EQUIPE)
+    {
+        printf("Limite de jogador alcançados.\n");
+        printf("Escolha o índice de uma nova equipe do jogador: ");
+        scanf("%d", &novoJogador.idEquipe);
+    }
+
+    novoJogador.idEquipe--;
     novoJogador.golsMarcados = 0;
     jogadores[totalJogadores++] = novoJogador;
+    equipes[novoJogador.idEquipe].totalJogadores++;
     printf("Jogador cadastrado com sucesso!\n");
 }
 

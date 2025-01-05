@@ -2,7 +2,7 @@
 #define EQUIPE_H
 
 #define MAX_EQUIPES 50
-#define MAX_JOGADORES_POR_EQUIPE 30
+#define MAX_JOGADORES_POR_EQUIPE 4
 
 typedef struct
 {

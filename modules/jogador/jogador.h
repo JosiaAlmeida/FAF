@@ -3,12 +3,13 @@
 
 #define MAX_JOGADORES 1000
 
-typedef struct {
+typedef struct
+{
     char nome[50];
     int idade;
     int numeroCamisa;
     char posicao[20];
-    int idEquipe; // Índice da equipe no vetor de equipes
+    int idEquipe;
     int golsMarcados;
 } Jogador;
 

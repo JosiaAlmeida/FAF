@@ -62,7 +62,7 @@ void listarEquipes()
     }
     for (int i = 0; i < totalEquipes; i++)
     {
-        printf("%d. %s - %s (Fundada em %d), treinador: %s\n", i + 1, equipes[i].nome, equipes[i].cidade, equipes[i].anoFundacao, equipes[i].treinador);
+        printf("%d. %s - %s (Fundada em %d), total de jogadores: %d, treinador: %s\n", i + 1, equipes[i].nome, equipes[i].cidade, equipes[i].anoFundacao, equipes[i].totalJogadores, equipes[i].treinador);
     }
 }
 
