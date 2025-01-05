@@ -9,8 +9,8 @@
 extern Campeonato campeonatos[MAX_CAMPEONATOS];
 extern Equipe equipes[MAX_EQUIPES];
 extern Jogador jogadores[MAX_JOGADORES];
-extern Partida partidas[MAX_PARTIDAS]; // Declaração da variável global
-extern int totalPartidas;              // Declaração de total de partidas
+extern Partida partidas[MAX_PARTIDAS];
+extern int totalPartidas;
 
 extern int totalEquipes;
 extern int totalJogadores;

@@ -1,0 +1,6 @@
+{
+  "description": "",
+  "scripts": {
+    "go": "make run"
+  }
+}

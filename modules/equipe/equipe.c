@@ -2,6 +2,7 @@
 #include <string.h>
 #include "equipe.h"
 #include "../dados.h"
+#include "../utils/validate.h"
 
 Equipe equipes[MAX_EQUIPES];
 int totalEquipes = 0;
@@ -20,14 +21,32 @@ void cadastrarEquipe()
     }
 
     Equipe novaEquipe;
-    printf("Nome da equipe: ");
-    scanf(" %[^\n]", novaEquipe.nome);
-    printf("Cidade: ");
-    scanf(" %[^\n]", novaEquipe.cidade);
-    printf("Ano de fundacao: ");
-    scanf("%d", &novaEquipe.anoFundacao);
-    printf("Treinador: ");
-    scanf(" %[^\n]", novaEquipe.treinador);
+
+    do
+    {
+        printf("Nome da equipe: ");
+        scanf(" %[^\n]", novaEquipe.nome);
+    } while (!validateField(novaEquipe.nome, "Nome da equipe"));
+
+    do
+    {
+        printf("Cidade: ");
+        scanf(" %[^\n]", novaEquipe.cidade);
+    } while (!validateField(novaEquipe.cidade, "Cidade"));
+
+    printf("Ano de fundação: ");
+    while (scanf("%d", &novaEquipe.anoFundacao) != 1 || novaEquipe.anoFundacao < 1800 || novaEquipe.anoFundacao > 2100)
+    {
+        printf("Ano inválido. Digite novamente: ");
+        while (getchar() != '\n')
+            ;
+    }
+
+    do
+    {
+        printf("Treinador: ");
+        scanf(" %[^\n]", novaEquipe.treinador);
+    } while (!validateField(novaEquipe.treinador, "Treinador"));
 
     novaEquipe.totalJogadores = 0;
     equipes[totalEquipes++] = novaEquipe;
@@ -43,13 +62,20 @@ void listarEquipes()
     }
     for (int i = 0; i < totalEquipes; i++)
     {
-        printf("%d. %s - %s (Fundada em %d)\n", i + 1, equipes[i].nome, equipes[i].cidade, equipes[i].anoFundacao);
+        printf("%d. %s - %s (Fundada em %d), treinador: %s\n", i + 1, equipes[i].nome, equipes[i].cidade, equipes[i].anoFundacao, equipes[i].treinador);
     }
 }
 
 void atualizarEquipe()
 {
+
+    if (totalEquipes == 0)
+    {
+        printf("Nenhuma equipe cadastrada para atualizar.\n");
+        return;
+    }
     listarEquipes();
+
     printf("Escolha o índice da equipe para atualizar: ");
     int indice;
     scanf("%d", &indice);
@@ -58,16 +84,33 @@ void atualizarEquipe()
         printf("Índice inválido.\n");
         return;
     }
-    indice--; // Ajustar para índice do array
-    printf("Novo nome (atual: %s): ", equipes[indice].nome);
-    scanf(" %[^\n]", equipes[indice].nome);
-    printf("Nova cidade (atual: %s): ", equipes[indice].cidade);
-    scanf(" %[^\n]", equipes[indice].cidade);
+    indice--;
+
+    do
+    {
+        printf("Novo nome (atual: %s): ", equipes[indice].nome);
+        scanf(" %[^\n]", equipes[indice].nome);
+    } while (!validateField(equipes[indice].nome, "Nome da equipe"));
+
+    do
+    {
+        printf("Nova cidade (atual: %s): ", equipes[indice].cidade);
+        scanf(" %[^\n]", equipes[indice].cidade);
+    } while (!validateField(equipes[indice].cidade, "Cidade"));
+
     printf("Novo ano de fundação (atual: %d): ", equipes[indice].anoFundacao);
-    scanf("%d", &equipes[indice].anoFundacao);
-    printf("Novo treinador (atual: %s): ", equipes[indice].treinador);
-    scanf(" %[^\n]", equipes[indice].treinador);
-    printf("Equipe atualizada com sucesso!\n");
+    while (scanf("%d", &equipes[indice].anoFundacao) != 1 || equipes[indice].anoFundacao < 1800 || equipes[indice].anoFundacao > 2100)
+    {
+        printf("Ano inválido. Digite novamente: ");
+        while (getchar() != '\n')
+            ;
+    }
+
+    do
+    {
+        printf("Novo treinador (atual: %s): ", equipes[indice].treinador);
+        scanf(" %[^\n]", equipes[indice].treinador);
+    } while (!validateField(equipes[indice].treinador, "Treinador"));
 }
 
 void menuCadastroEquipes()

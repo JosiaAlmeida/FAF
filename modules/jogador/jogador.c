@@ -3,6 +3,7 @@
 #include "jogador.h"
 #include "../equipe/equipe.h"
 #include "../dados.h"
+#include "../utils/validate.h"
 
 Jogador jogadores[MAX_JOGADORES];
 int totalJogadores = 0;
@@ -21,30 +22,39 @@ void cadastrarJogador()
     }
 
     Jogador novoJogador;
-    printf("Nome do jogador: ");
-    scanf(" %[^\n]", novoJogador.nome);
+    do
+    {
+        printf("Nome do jogador: ");
+        scanf(" %[^\n]", novoJogador.nome);
+    } while (!validateField(novoJogador.nome, "Nome do jogador"));
+
     printf("Idade: ");
     scanf("%d", &novoJogador.idade);
-    if (novoJogador.idade < 16 || novoJogador.idade > 40)
+    while (novoJogador.idade < 16 || novoJogador.idade > 40)
     {
-        printf("Idade inválida. O jogador deve ter entre 16 e 40 anos.\n");
-        return;
+        printf("Idade inválida. O jogador deve ter entre 16 e 40 anos.\nInsira a idade novamente:");
+        scanf("%d", &novoJogador.idade);
     }
+
     printf("Número da camisa: ");
     scanf("%d", &novoJogador.numeroCamisa);
-    printf("Posição (Atacante, Meio-campo, Defesa): ");
-    scanf(" %[^\n]", novoJogador.posicao);
+
+    do
+    {
+        printf("Posição (Atacante, Meio-campo, Defesa): ");
+        scanf(" %[^\n]", novoJogador.posicao);
+    } while (!validateField(novoJogador.posicao, "Posição"));
 
     listarEquipes();
     printf("Escolha o índice da equipe do jogador: ");
     scanf("%d", &novoJogador.idEquipe);
-    novoJogador.idEquipe--; // Ajusta para índice do array
-
-    if (novoJogador.idEquipe < 0 || novoJogador.idEquipe >= totalEquipes)
+    while (novoJogador.idEquipe < 1 || novoJogador.idEquipe > totalEquipes)
     {
         printf("Equipe inválida.\n");
-        return;
+        printf("Escolha o índice da equipe do jogador: ");
+        scanf("%d", &novoJogador.idEquipe);
     }
+    novoJogador.idEquipe--;
 
     novoJogador.golsMarcados = 0;
     jogadores[totalJogadores++] = novoJogador;
@@ -60,9 +70,9 @@ void listarJogadores()
     }
     for (int i = 0; i < totalJogadores; i++)
     {
-        printf("%d. %s, %d anos, camisa %d, posição: %s, Equipe: %d, Gols: %d\n",
+        printf("%d. %s, %d anos, camisa %d, posição: %s, Equipe: %d, Gols: %d, Equipa: %s\n",
                i + 1, jogadores[i].nome, jogadores[i].idade, jogadores[i].numeroCamisa,
-               jogadores[i].posicao, jogadores[i].idEquipe + 1, jogadores[i].golsMarcados);
+               jogadores[i].posicao, jogadores[i].idEquipe + 1, jogadores[i].golsMarcados, equipes[jogadores[i].idEquipe].nome);
     }
 }
 
@@ -79,14 +89,29 @@ void atualizarJogador()
     }
     indice--; // Ajustar para índice do array
 
-    printf("Novo nome (atual: %s): ", jogadores[indice].nome);
-    scanf(" %[^\n]", jogadores[indice].nome);
+    do
+    {
+        printf("Novo nome (atual: %s): ", jogadores[indice].nome);
+        scanf(" %[^\n]", jogadores[indice].nome);
+    } while (!validateField(jogadores[indice].nome, "Nome do jogador"));
+
     printf("Nova idade (atual: %d): ", jogadores[indice].idade);
     scanf("%d", &jogadores[indice].idade);
+    while (jogadores[indice].idade < 16 || jogadores[indice].idade > 40)
+    {
+        printf("Idade inválida. O jogador deve ter entre 16 e 40 anos.\nInsira a idade novamente:");
+        scanf("%d", &jogadores[indice].idade);
+    }
+
     printf("Novo número da camisa (atual: %d): ", jogadores[indice].numeroCamisa);
     scanf("%d", &jogadores[indice].numeroCamisa);
-    printf("Nova posição (atual: %s): ", jogadores[indice].posicao);
-    scanf(" %[^\n]", jogadores[indice].posicao);
+
+    do
+    {
+        printf("Nova posição (atual: %s): ", jogadores[indice].posicao);
+        scanf(" %[^\n]", jogadores[indice].posicao);
+    } while (!validateField(jogadores[indice].posicao, "Posição"));
+
     printf("Jogador atualizado com sucesso!\n");
 }
 

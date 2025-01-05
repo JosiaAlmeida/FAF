@@ -22,7 +22,8 @@ void inicializarSistema()
 int main()
 {
     setlocale(LC_ALL, "pt_BR.UTF-8");
-    inicializarSistema(); // Inicializa dados, pode carregar de arquivos
+    inicializarSistema();
+    carregarDados();
 
     int opcao;
     do
@@ -52,7 +53,7 @@ int main()
             break;
         case 0:
             printf("Saindo...\n");
-            salvarDados(); // Salva dados persistentes
+            salvarDados();
             break;
         default:
             printf("Opcao invalida!\n");

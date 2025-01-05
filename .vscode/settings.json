@@ -60,6 +60,8 @@
     "dados.h": "c",
     "equipe.h": "c",
     "partida.h": "c",
-    "campeonato.h": "c"
+    "campeonato.h": "c",
+    "ctype.h": "c",
+    "stdio.h": "c"
   }
 }
