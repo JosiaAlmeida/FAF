@@ -25,7 +25,7 @@ void registrarPartida()
     listarCampeonatos();
     printf("Escolha o índice do campeonato: ");
     scanf("%d", &novaPartida.idCampeonato);
-    novaPartida.idCampeonato--; // Ajustar para índice do array
+    novaPartida.idCampeonato--;
 
     if (novaPartida.idCampeonato < 0 || novaPartida.idCampeonato >= totalCampeonatos)
     {

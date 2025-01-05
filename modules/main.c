@@ -43,13 +43,20 @@ int main()
                 menuCadastroJogadores();
             break;
         case 3:
-            menuGerenciamentoCampeonatos();
+            if (totalEquipes < 4)
+                printf("É necessário 4 equipas no minimo para criar um campeonato\n");
+            else
+                menuGerenciamentoCampeonatos();
             break;
         case 4:
             menuGerenciamentoPartidas();
             break;
         case 5:
             menuRelatorios();
+            break;
+        case 6:
+            printf("Salvando...\n");
+            salvarDados();
             break;
         case 0:
             printf("Saindo...\n");
@@ -71,5 +78,6 @@ void exibirMenu()
     printf("3. Gerenciamento de Campeonatos\n");
     printf("4. Registro de Partidas\n");
     printf("5. Relatórios e Estatísticas\n");
+    printf("6. Salvar Progresso\n");
     printf("0. Sair\n");
 }

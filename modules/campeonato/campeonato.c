@@ -31,10 +31,11 @@ void cadastrarCampeonato()
     int numEquipes;
     printf("Número de equipes: ");
     scanf("%d", &numEquipes);
-    if (numEquipes < 4 || numEquipes > 20)
+    while (numEquipes < 4 || numEquipes > 20 || numEquipes > totalEquipes)
     {
         printf("Número inválido de equipes.\n");
-        return;
+        printf("Número de equipes: ");
+        scanf("%d", &numEquipes);
     }
 
     for (int i = 0; i < numEquipes; i++)
