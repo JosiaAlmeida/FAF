@@ -8,6 +8,7 @@
 #include "relatorio/relatorio.h"
 #include "persistencia/persistencia.h"
 #include "dados.h"
+#include "utils/validate.h"
 
 void exibirMenu();
 

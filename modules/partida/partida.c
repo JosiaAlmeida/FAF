@@ -55,8 +55,59 @@ void registrarPartida()
 
     printf("Placar da equipe A: ");
     scanf("%d", &novaPartida.placarA);
+    while (novaPartida.placarA != 0)
+    {
+
+        printf("\n=== Selecione o artilheiro ===\n");
+        int jogador = 0;
+        int goal = 0;
+        for (int j = 0; j < equipes[novaPartida.equipeA].totalJogadores; j++)
+        {
+            if (jogadores[j].idEquipe == novaPartida.equipeA)
+            {
+                printf("%d. %s\n", j + 1, jogadores[j].nome);
+            }
+        }
+        scanf("%d", &jogador);
+        printf("Total de Golos: ");
+        scanf("%d", &goal);
+        while (goal > novaPartida.placarA)
+        {
+            printf("Quantidade invalida, Insira o total de golos novamente: ");
+            scanf("%d", &goal);
+        }
+        jogadores[jogador--].golsMarcados += goal;
+        novaPartida.placarA -= goal;
+    }
+
     printf("Placar da equipe B: ");
     scanf("%d", &novaPartida.placarB);
+
+    while (novaPartida.placarB != 0)
+    {
+
+        printf("\n=== Selecione o artilheiro ===\n");
+        printf("Placar %d, total %d", novaPartida.placarB, equipes[novaPartida.placarB].totalJogadores);
+        int jogador = 0;
+        int goal = 0;
+        for (int j = 0; j < equipes[novaPartida.placarB].totalJogadores; j++)
+        {
+            if (jogadores[j].idEquipe == novaPartida.placarB)
+            {
+                printf("%d. %s\n", j + 1, jogadores[j].nome);
+            }
+        }
+        scanf("%d", &jogador);
+        printf("Total de Golos: ");
+        scanf("%d", &goal);
+        while (goal > novaPartida.placarB)
+        {
+            printf("Quantidade invalida, Insira o total de golos novamente: ");
+            scanf("%d", &goal);
+        }
+        jogadores[jogador--].golsMarcados += goal;
+        novaPartida.placarB -= goal;
+    }
 
     partidas[totalPartidas++] = novaPartida;
     printf("Partida registrada com sucesso!\n");
